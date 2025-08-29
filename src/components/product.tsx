@@ -70,50 +70,53 @@ const Product: React.FC<ProductProps> = ({
   return (
     <>
       <div className="product grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="image__box md:mx-8 w-full h-full max-h-[300px] max-w-[500px] overflow-hidden relative">
-          {selectedImage ? (
-            <img
-              src={
-                products.find((product) => product.image === selectedImage)
-                  ?.image
-              }
-              alt="product image"
-              key={
-                products.find((product) => product.image === selectedImage)?.id
-              }
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <img
-              src={products[0].image}
-              alt="product image"
-              key={products[0].id}
-            />
-          )}
-          <button
-            aria-label="Previous Image"
-            onClick={handlePreviousImage}
-            className="absolute top-1/2 left-4 -translate-y-1/2 bg-white rounded-full w-10 h-10 grid place-items-center hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer"
-          >
-            <img src="/images/icon-previous.svg" alt="Previous Icon" />
-          </button>
-          <button
-            aria-label="Next Image"
-            onClick={handleNextImage}
-            className="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full w-10 h-10 grid place-items-center hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer"
-          >
-            <img src="/images/icon-next.svg" alt="Next Icon" />
-          </button>
-        </div>
-        <div className="thumbnails justify-center items-center gap-4 hidden md:flex">
-          {products.map((product: ProductItem) => (
-            <img
-              key={product.id}
-              src={product.thumbnail}
-              onClick={() => handleThumbnailClick(product.id)}
-              className="w-18 h-18 object-cover cursor-pointer"
-            />
-          ))}
+        <div>
+          <div className="image__box md:mx-8 w-full h-full max-h-[300px] max-w-[500px] overflow-hidden relative">
+            {selectedImage ? (
+              <img
+                src={
+                  products.find((product) => product.image === selectedImage)
+                    ?.image
+                }
+                alt="product image"
+                key={
+                  products.find((product) => product.image === selectedImage)
+                    ?.id
+                }
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <img
+                src={products[0].image}
+                alt="product image"
+                key={products[0].id}
+              />
+            )}
+            <button
+              aria-label="Previous Image"
+              onClick={handlePreviousImage}
+              className="absolute top-1/2 left-4 -translate-y-1/2 bg-white rounded-full w-10 h-10 grid place-items-center hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer"
+            >
+              <img src="/images/icon-previous.svg" alt="Previous Icon" />
+            </button>
+            <button
+              aria-label="Next Image"
+              onClick={handleNextImage}
+              className="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full w-10 h-10 grid place-items-center hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer"
+            >
+              <img src="/images/icon-next.svg" alt="Next Icon" />
+            </button>
+          </div>
+          <div className="thumbnails justify-center items-center gap-4 hidden md:flex">
+            {products.map((product: ProductItem) => (
+              <img
+                key={product.id}
+                src={product.thumbnail}
+                onClick={() => handleThumbnailClick(product.id)}
+                className="w-18 h-18 object-cover cursor-pointer"
+              />
+            ))}
+          </div>
         </div>
       </div>
       <ProductDescription
