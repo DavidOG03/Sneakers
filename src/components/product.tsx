@@ -45,45 +45,36 @@ const Product: React.FC<ProductProps> = ({
     },
   ];
 
-  const handleThumbnailClick = (currentProduct: number) => {
-    setSelectedImage(products[currentProduct - 1].image);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const handleThumbnailClick = (id: number) => {
+    const index = products.findIndex((product) => product.id === id);
+    if (index !== -1) setSelectedImage(selectedImage);
   };
 
   const handlePreviousImage = () => {
-    const currentIndex = products.findIndex(
-      (product) => product.image === selectedImage
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? products.length - 1 : prevIndex - 1
     );
-    if (currentIndex - 1 >= 0) {
-      handleThumbnailClick(currentIndex - 1);
-    }
   };
 
   const handleNextImage = () => {
-    const currentIndex = products.findIndex(
-      (product) => product.image === selectedImage
+    setCurrentIndex((prevIndex) =>
+      prevIndex === products.length - 1 ? 0 : prevIndex + 1
     );
-    if (currentIndex + 1 < products.length) {
-      handleThumbnailClick(currentIndex + 1);
-    }
   };
 
   return (
     <>
-      <div className="product grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <div className="image__box md:mx-8 w-full h-full max-h-[300px] max-w-[500px] overflow-hidden relative">
+      <div className="product grid grid-cols-1 md:grid-cols-2 gap-4 md:py-22 md:px-14">
+        <div className="md:max-w-[450px]">
+          <div className="image__box md:rounded-[1rem] w-full h-full max-h-[550px] md:max-h-[450px] max-w-[450px] overflow-hidden relative">
             {selectedImage ? (
               <img
-                src={
-                  products.find((product) => product.image === selectedImage)
-                    ?.image
-                }
+                src={products[currentIndex].image}
                 alt="product image"
-                key={
-                  products.find((product) => product.image === selectedImage)
-                    ?.id
-                }
-                className="w-full h-full object-cover"
+                key={products[currentIndex].id}
+                className="w-full h-full object-cover md:rounded-xl"
               />
             ) : (
               <img
@@ -95,36 +86,38 @@ const Product: React.FC<ProductProps> = ({
             <button
               aria-label="Previous Image"
               onClick={handlePreviousImage}
-              className="absolute top-1/2 left-4 -translate-y-1/2 bg-white rounded-full w-10 h-10 grid place-items-center hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer"
+              className="absolute top-1/2 left-4 -translate-y-1/2 bg-white rounded-full w-10 h-10 grid place-items-center hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer md:hidden"
             >
               <img src="/images/icon-previous.svg" alt="Previous Icon" />
             </button>
             <button
               aria-label="Next Image"
               onClick={handleNextImage}
-              className="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full w-10 h-10 grid place-items-center hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer"
+              className="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full w-10 h-10 grid place-items-center hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer md:hidden"
             >
               <img src="/images/icon-next.svg" alt="Next Icon" />
             </button>
           </div>
-          <div className="thumbnails justify-center items-center gap-4 hidden md:flex">
-            {products.map((product: ProductItem) => (
+          <div className="thumbnails justify-between items-center gap-4 hidden md:flex mt-8 w-full max-w-[450px]">
+            {products.map((product: ProductItem, index) => (
               <img
                 key={product.id}
                 src={product.thumbnail}
                 onClick={() => handleThumbnailClick(product.id)}
-                className="w-18 h-18 object-cover cursor-pointer"
+                className={`w-22 h-22 object-cover cursor-pointer rounded-lg ${
+                  currentIndex === index ? "ring-2 ring-orange-500" : ""
+                }`}
               />
             ))}
           </div>
         </div>
+        <ProductDescription
+          count={count}
+          onDecreaseCount={onDecreaseCount}
+          onIncreaseCount={onIncreaseCount}
+          handleSetCount={handleSetCount}
+        />
       </div>
-      <ProductDescription
-        count={count}
-        onDecreaseCount={onDecreaseCount}
-        onIncreaseCount={onIncreaseCount}
-        handleSetCount={handleSetCount}
-      />
     </>
   );
 };

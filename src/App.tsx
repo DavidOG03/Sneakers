@@ -35,11 +35,18 @@ function App() {
 
   const handleDeleteItem = () => {
     setDeleted(true);
+    setCount(0);
   };
   const cartRef = useRef<HTMLDivElement>(null);
+  const cartBtnRef = useRef<HTMLButtonElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
+    if (
+      cartRef.current &&
+      !cartRef.current.contains(event.target as Node) &&
+      cartBtnRef.current &&
+      !cartBtnRef.current.contains(event.target as Node)
+    ) {
       setCartOpen(false);
     }
   };
@@ -57,6 +64,7 @@ function App() {
         amount={amount}
         handleToggleCart={handleToggleCart}
         deleted={deleted}
+        ref={cartBtnRef}
       />
       {cartOpen && (
         <Cart
