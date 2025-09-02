@@ -34,7 +34,7 @@ const Navbar = forwardRef<HTMLButtonElement, NavbarProps>(
           <img
             src="/images/logo.svg"
             alt="sneakers logo"
-            className="inline-block  xl:mazxw-[200px]"
+            className="inline-block  xl:max-w-[200px]"
           />
         </div>
         <ul
