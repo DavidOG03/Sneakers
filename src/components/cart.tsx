@@ -10,7 +10,7 @@ const Cart = forwardRef<HTMLDivElement, CartProps>(
   ({ amount, deleted, onDeleteItem }, ref) => {
     return (
       <div
-        className="cart absolute top-[75px] md:top-[100px] right-1/2 md:right-0 md:translate-x-0 translate-x-1/2 bg-white shadow-xl rounded-[12px] w-[95%] h-full max-h-[260px] max-w-sm z-4 flex flex-col"
+        className="cart absolute top-[75px] md:top-[90px] right-1/2 md:right-[116px] md:translate-x-0 translate-x-1/2 bg-white shadow-xl rounded-[12px] w-[95%] h-full max-h-[260px] max-w-sm z-4 flex flex-col"
         ref={ref}
       >
         <h2 className="font-kumbh text-base py-5 px-5 block w-full border-b border-b-grayishBlue font-semibold">
