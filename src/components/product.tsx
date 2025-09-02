@@ -140,6 +140,7 @@ const Product: React.FC<ProductProps> = ({
               <img
                 key={product.id}
                 src={product.thumbnail}
+                alt="thumbnail"
                 onClick={() => handleThumbnailClick(product.id)}
                 className={`w-16 h-16 xl:w-22 xl:h-22 object-cover cursor-pointer relative rounded-lg hover:before:w-full hover:before:h-full hover:before:bg-lightGrayishBlue/85 hover:before:inset-0 ${
                   currentIndex === index

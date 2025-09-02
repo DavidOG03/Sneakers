@@ -59,6 +59,7 @@ const SlideShow = forwardRef<HTMLDivElement, slideShowProps>(
             <img
               key={product.id}
               src={product.thumbnail}
+              alt="thumbnail"
               onClick={() => onThumbnailClick(product.id)}
               className={`w-18 h-18 xl:w-22 xl:h-22 object-cover cursor-pointer rounded-lg relative hover:before:w-full hover:before:h-full hover:before:bg-lightGrayishBlue/85 hover:before:inset-0 ${
                 currentIndex === index
