@@ -26,15 +26,19 @@ function App() {
 
   const handleSetCount = () => {
     setAmount(count);
+    setCount(0);
+    setDeleted(false);
   };
 
   const handleToggleCart = () => {
     setCartOpen(!cartOpen);
   };
+
   const [deleted, setDeleted] = useState(false);
 
   const handleDeleteItem = () => {
     setDeleted(true);
+    setAmount(0);
     setCount(0);
   };
   const cartRef = useRef<HTMLDivElement>(null);

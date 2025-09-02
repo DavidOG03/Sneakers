@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ProductDescription from "./productDescription";
+import SlideShow from "./slideShow";
 
 interface ProductItem {
   id: number;
@@ -21,7 +22,6 @@ const Product: React.FC<ProductProps> = ({
   onDecreaseCount,
   handleSetCount,
 }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const products: ProductItem[] = [
     {
       id: 1,
@@ -46,10 +46,11 @@ const Product: React.FC<ProductProps> = ({
   ];
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isSlideshowActive, setIsSlideshowActive] = useState<boolean>(false);
 
   const handleThumbnailClick = (id: number) => {
     const index = products.findIndex((product) => product.id === id);
-    if (index !== -1) setSelectedImage(selectedImage);
+    if (index !== -1) setCurrentIndex(index);
   };
 
   const handlePreviousImage = () => {
@@ -64,23 +65,59 @@ const Product: React.FC<ProductProps> = ({
     );
   };
 
+  const handleSlideShow = () => {
+    // Logic for handling slideshow
+    setIsSlideshowActive(true);
+  };
+
+  const slideShowRef = useRef<HTMLDivElement>(null);
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      slideShowRef.current &&
+      !slideShowRef.current.contains(event.target as Node)
+    ) {
+      setIsSlideshowActive(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
-      <div className="product grid grid-cols-1 md:grid-cols-2 gap-4 md:py-22 md:px-14">
+      {isSlideshowActive && (
+        <SlideShow
+          currentIndex={currentIndex}
+          onClose={() => setIsSlideshowActive(false)}
+          onPrevious={handlePreviousImage}
+          onNext={handleNextImage}
+          onThumbnailClick={handleThumbnailClick}
+          products={products}
+          ref={slideShowRef}
+        />
+      )}
+      <div className="product mt-[68.81px] grid grid-cols-1 md:grid-cols-2 gap-4 md:py-22 md:px-14">
         <div className="md:max-w-[450px]">
-          <div className="image__box md:rounded-[1rem] w-full h-full max-h-[550px] md:max-h-[450px] max-w-[450px] overflow-hidden relative">
-            {selectedImage ? (
+          <div className="image__box md:rounded-[1rem] w-full h-full max-h-[450px] md:max-w-[450px] overflow-hidden relative bg-lightGrayishBlue cursor-pointer">
+            {currentIndex ? (
               <img
                 src={products[currentIndex].image}
                 alt="product image"
                 key={products[currentIndex].id}
                 className="w-full h-full object-cover md:rounded-xl"
+                onClick={handleSlideShow}
               />
             ) : (
               <img
                 src={products[0].image}
                 alt="product image"
                 key={products[0].id}
+                className="w-full h-full object-cover md:rounded-xl"
+                onClick={handleSlideShow}
               />
             )}
             <button
@@ -98,14 +135,16 @@ const Product: React.FC<ProductProps> = ({
               <img src="/images/icon-next.svg" alt="Next Icon" />
             </button>
           </div>
-          <div className="thumbnails justify-between items-center gap-4 hidden md:flex mt-8 w-full max-w-[450px]">
+          <div className="thumbnails justify-between items-center md:gap-2 xl:gap-4 hidden md:flex mt-8 w-full max-w-[450px]">
             {products.map((product: ProductItem, index) => (
               <img
                 key={product.id}
                 src={product.thumbnail}
                 onClick={() => handleThumbnailClick(product.id)}
-                className={`w-22 h-22 object-cover cursor-pointer rounded-lg ${
-                  currentIndex === index ? "ring-2 ring-orange-500" : ""
+                className={`w-16 h-16 xl:w-22 xl:h-22 object-cover cursor-pointer relative rounded-lg hover:before:w-full hover:before:h-full hover:before:bg-lightGrayishBlue/85 hover:before:inset-0 ${
+                  currentIndex === index
+                    ? "ring-2 ring-orange-500 before:w-full before:absolute before:h-full before:bg-lightGrayishBlue/85 before:inset-0"
+                    : ""
                 }`}
               />
             ))}

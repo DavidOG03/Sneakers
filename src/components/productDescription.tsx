@@ -11,7 +11,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
   handleSetCount,
 }) => {
   return (
-    <div className="product__description w-full px-5.5 py-0 md:pl-14 md:py-16 md:pr-0">
+    <div className="product__description w-full px-5.5 pt-0 pb-5.5 md:pl-14 md:py-16 md:pr-0">
       <span className="tagline text-[12px] md:text-[14px] uppercase text-darkGrayishBlue font-kumbh font-semibold tracking-[0.15em]">
         sneaker company
       </span>
@@ -36,7 +36,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
           $250.00
         </span>
       </div>
-      <div className="add_to_cart mt-6 md:flex md:justify-start md:items-center md:gap-4 md:py-2">
+      <div className="add_to_cart mt-6 xl:flex xl:justify-start xl:items-center xl:gap-4 xl:py-2">
         <div className="count flex justify-between items-center gap-4 bg-lightGrayishBlue rounded-lg mb-4 md:mb-0 py-1 px-1 min-w-[160px]">
           <button
             type="button"

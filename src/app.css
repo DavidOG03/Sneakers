@@ -9,6 +9,6 @@
   --color-lightGrayishBlue: hsl(223, 64%, 98%);
   --color-white: hsl(0, 0%, 100%);
   --color-black: hsl(0, 0%, 0%);
-  --color-opacityBlack: hsla(0, 0%, 0%, 0.25);
+  --color-opacityBlack: hsla(0, 0%, 0%, 0.85);
   --font-kumbh: "Kumbh Sans", sans-serif;
 }
