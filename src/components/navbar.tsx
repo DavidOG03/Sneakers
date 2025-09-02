@@ -50,19 +50,19 @@ const Navbar = forwardRef<HTMLButtonElement, NavbarProps>(
           >
             <img src="/images/icon-close.svg" alt="Close Menu" />
           </button>
-          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full md:before:hidden before:z-10 before:origin-left">
+          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 md:before:-bottom-10 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full before:z-10 before:origin-left">
             Collection
           </li>
-          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full md:before:hidden before:z-10 before:origin-left">
+          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 md:before:-bottom-10 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full before:z-10 before:origin-left">
             Men
           </li>
-          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full md:before:hidden before:z-10 before:origin-left">
+          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 md:before:-bottom-10 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full before:z-10 before:origin-left">
             Women
           </li>
-          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full md:before:hidden before:z-10 before:origin-left">
+          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 md:before:-bottom-10 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full before:z-10 before:origin-left">
             About
           </li>
-          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full md:before:hidden before:z-10 before:origin-left">
+          <li className="navlink block md:inline-block text-[1rem] font-semibold md:px-1 transition-color duration-300 md:text-darkGrayishBlue hover:text-black cursor-pointer md:font-medium relative before:absolute before:w-0 before:h-1 before:-bottom-3 md:before:-bottom-10 before:left-0 before:bg-orange before:rounded-2xl before:transition-all before:duration-300 hover:before:w-full before:z-10 before:origin-left">
             Contact
           </li>
         </ul>
