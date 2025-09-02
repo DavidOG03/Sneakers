@@ -71,10 +71,13 @@ const Product: React.FC<ProductProps> = ({
   };
 
   const slideShowRef = useRef<HTMLDivElement>(null);
+  const thumbnailsRef = useRef<HTMLDivElement>(null);
   const handleClickOutside = (event: MouseEvent) => {
     if (
       slideShowRef.current &&
-      !slideShowRef.current.contains(event.target as Node)
+      !slideShowRef.current.contains(event.target as Node) &&
+      thumbnailsRef.current &&
+      !thumbnailsRef.current.contains(event.target as Node)
     ) {
       setIsSlideshowActive(false);
     }
@@ -137,17 +140,27 @@ const Product: React.FC<ProductProps> = ({
           </div>
           <div className="thumbnails justify-between items-center md:gap-2 xl:gap-4 hidden md:flex mt-8 w-full max-w-[450px]">
             {products.map((product: ProductItem, index) => (
-              <img
+              <div
                 key={product.id}
-                src={product.thumbnail}
-                alt="thumbnail"
+                className={`relative w-18 h-18 xl:w-22 xl:h-22 rounded-lg cursor-pointer  ${
+                  currentIndex === index ? "ring-2 ring-orange-500" : ""
+                } `}
                 onClick={() => handleThumbnailClick(product.id)}
-                className={`w-16 h-16 xl:w-22 xl:h-22 object-cover cursor-pointer relative rounded-lg hover:before:w-full hover:before:h-full hover:before:bg-lightGrayishBlue/85 hover:before:inset-0 ${
-                  currentIndex === index
-                    ? "ring-2 ring-orange-500 before:w-full before:absolute before:h-full before:bg-lightGrayishBlue/85 before:inset-0"
-                    : ""
-                }`}
-              />
+              >
+                <img
+                  src={product.thumbnail}
+                  alt="thumbnail"
+                  className="w-full h-full object-cover rounded-lg"
+                />
+
+                <div
+                  className={`absolute inset-0 rounded-lg transition ${
+                    currentIndex === index
+                      ? "bg-lightGrayishBlue/50"
+                      : "hover:bg-lightGrayishBlue/50"
+                  }`}
+                ></div>
+              </div>
             ))}
           </div>
         </div>
