@@ -8,6 +8,7 @@ function App() {
   const [count, setCount] = useState<number>(0);
   const [amount, setAmount] = useState<number>(0);
   const [cartOpen, setCartOpen] = useState<boolean>(false);
+  const [noItem, setNoItem] = useState<boolean>(false);
 
   const handleDecreaseCount = () => {
     setCount((prevCount) => prevCount - 1);
@@ -22,12 +23,25 @@ function App() {
     if (count >= 10) {
       setCount(10);
     }
+
+    if (count === 0) {
+      setNoItem(false);
+    }
   };
 
   const handleSetCount = () => {
     setAmount(count);
     setCount(0);
     setDeleted(false);
+    if (count === 0) {
+      setNoItem(true);
+    }
+    if (count > 0) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
   const handleToggleCart = () => {
@@ -84,6 +98,8 @@ function App() {
         onIncreaseCount={handleIncreaseCount}
         onDecreaseCount={handleDecreaseCount}
         handleSetCount={handleSetCount}
+        noItem={noItem}
+        // setNoItem={setNoItem}
       />
     </>
   );

@@ -14,6 +14,8 @@ interface ProductProps {
   onIncreaseCount: () => void;
   onDecreaseCount: () => void;
   handleSetCount: () => void;
+  noItem: boolean;
+  // setNoItem:() => void
 }
 
 const Product: React.FC<ProductProps> = ({
@@ -21,6 +23,8 @@ const Product: React.FC<ProductProps> = ({
   onIncreaseCount,
   onDecreaseCount,
   handleSetCount,
+  noItem,
+  // setNoItem
 }) => {
   const products: ProductItem[] = [
     {
@@ -47,6 +51,7 @@ const Product: React.FC<ProductProps> = ({
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isSlideshowActive, setIsSlideshowActive] = useState<boolean>(false);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   const handleThumbnailClick = (id: number) => {
     const index = products.findIndex((product) => product.id === id);
@@ -105,7 +110,14 @@ const Product: React.FC<ProductProps> = ({
       )}
       <div className="product mt-[68.81px] grid grid-cols-1 md:grid-cols-2 gap-4 md:py-22 md:px-14">
         <div className="md:max-w-[450px]">
-          <div className="image__box md:rounded-[1rem] w-full h-full max-h-[450px] md:max-w-[450px] overflow-hidden relative bg-lightGrayishBlue cursor-pointer">
+          <div
+            className={`image__box md:rounded-[1rem] w-full h-full aspect-square ${
+              loaded ? "" : "animate-pulse"
+            } max-h-[450px] md:max-w-[450px] overflow-hidden relative bg-lightGrayishBlue cursor-pointer`}
+          >
+            {!loaded && (
+              <div className="absolute inset-0 bg-lightGrayishBlue animate-pulse rounded-xl"></div>
+            )}
             {currentIndex ? (
               <img
                 src={products[currentIndex].image}
@@ -113,6 +125,7 @@ const Product: React.FC<ProductProps> = ({
                 key={products[currentIndex].id}
                 className="w-full h-full object-cover md:rounded-xl"
                 onClick={handleSlideShow}
+                onLoad={() => setLoaded(true)}
               />
             ) : (
               <img
@@ -121,6 +134,7 @@ const Product: React.FC<ProductProps> = ({
                 key={products[0].id}
                 className="w-full h-full object-cover md:rounded-xl"
                 onClick={handleSlideShow}
+                onLoad={() => setLoaded(true)}
               />
             )}
             <button
@@ -169,6 +183,8 @@ const Product: React.FC<ProductProps> = ({
           onDecreaseCount={onDecreaseCount}
           onIncreaseCount={onIncreaseCount}
           handleSetCount={handleSetCount}
+          noItem={noItem}
+          // setNoItem={setNoItem}
         />
       </div>
     </>
