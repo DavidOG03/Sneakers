@@ -5,7 +5,7 @@ interface ProductDescriptionProps {
   onIncreaseCount: () => void;
   onDecreaseCount: () => void;
   handleSetCount: () => void;
-  noItem: boolean;
+  // noItem: boolean;
   // setNoItem:() => void
 }
 const ProductDescription: React.FC<ProductDescriptionProps> = ({
@@ -13,7 +13,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
   onDecreaseCount,
   onIncreaseCount,
   handleSetCount,
-  noItem,
+  // noItem,
 }) => {
   return (
     <div className="product__description w-full px-5.5 pt-0 pb-5.5 md:pl-14 md:py-16 md:pr-0">
@@ -59,9 +59,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
           <button
             type="button"
             onClick={onIncreaseCount}
-            className={`py-4 px-5 cursor-pointer ${
-              noItem ? "animate-ping" : ""
-            }`}
+            className="py-4 px-5 cursor-pointer"
             aria-label="Increase Count"
           >
             <img
@@ -72,7 +70,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
           </button>
         </div>
         <button
-          className="flex justify-center items-center gap-4 bg-orange rounded-lg py-4 px-4 text-darkBlue w-full md:max-w-[370px] font-semibold shadow-[0_4px_8px_-1px_hsl(25, 100%, 94%)] hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer "
+          className="flex justify-center items-center gap-4 bg-orange rounded-lg py-4 px-4 text-darkBlue w-full md:max-w-[370px] font-semibold shadow-[0_8px_12px_-1px_hsl(25, 100%, 94%)] hover:opacity-70 transition-opacity ease-in-out duration-300 cursor-pointer"
           onClick={handleSetCount}
         >
           <img src="/images/icon-cart.svg" alt="Cart Icon" />

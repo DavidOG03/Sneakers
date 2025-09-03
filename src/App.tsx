@@ -3,52 +3,59 @@ import Product from "./components/product";
 import "./app.css";
 import Cart from "./components/cart";
 import { useState, useRef, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   const [count, setCount] = useState<number>(0);
   const [amount, setAmount] = useState<number>(0);
   const [cartOpen, setCartOpen] = useState<boolean>(false);
-  const [noItem, setNoItem] = useState<boolean>(false);
+  // const [noItem, setNoItem] = useState<boolean>(false);
+  const [deleted, setDeleted] = useState(false);
+
+  const totalSneakers = 10;
+  const remaining = totalSneakers - amount;
 
   const handleDecreaseCount = () => {
-    setCount((prevCount) => prevCount - 1);
-    if (count <= 0) {
-      setCount(0);
+    if (count > 0) {
+      setCount((prev) => prev - 1);
     }
   };
 
   const handleIncreaseCount = () => {
-    setCount((prevCount) => prevCount + 1);
-
-    if (count >= 10) {
-      setCount(10);
-    }
-
-    if (count === 0) {
-      setNoItem(false);
+    if (count < remaining) {
+      setCount((prev) => prev + 1);
+    } else {
+      toast.info("Not enough sneakers left!");
     }
   };
 
   const handleSetCount = () => {
-    setAmount(count);
-    setCount(0);
-    setDeleted(false);
     if (count === 0) {
-      setNoItem(true);
+      toast.info("Select at least 1 sneaker.");
+      return;
     }
-    if (count > 0) {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+
+    if (count <= remaining) {
+      setAmount((prev) => prev + count);
+      setCount(0);
+
+      if (count > 0) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      if (count === remaining) {
+        toast.info("No more Sneakers left");
+      }
+    } else {
+      toast.info("Not enough sneakers left!");
     }
+
+    setDeleted(false);
   };
 
   const handleToggleCart = () => {
     setCartOpen(!cartOpen);
   };
-
-  const [deleted, setDeleted] = useState(false);
 
   const handleDeleteItem = () => {
     setDeleted(true);
@@ -78,6 +85,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <Navbar
         amount={amount}
         handleToggleCart={handleToggleCart}
@@ -98,7 +106,7 @@ function App() {
         onIncreaseCount={handleIncreaseCount}
         onDecreaseCount={handleDecreaseCount}
         handleSetCount={handleSetCount}
-        noItem={noItem}
+        // noItem={noItem}
         // setNoItem={setNoItem}
       />
     </>

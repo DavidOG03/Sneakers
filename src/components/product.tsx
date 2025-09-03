@@ -14,7 +14,7 @@ interface ProductProps {
   onIncreaseCount: () => void;
   onDecreaseCount: () => void;
   handleSetCount: () => void;
-  noItem: boolean;
+  // noItem: boolean;
   // setNoItem:() => void
 }
 
@@ -23,7 +23,7 @@ const Product: React.FC<ProductProps> = ({
   onIncreaseCount,
   onDecreaseCount,
   handleSetCount,
-  noItem,
+  // noItem,
   // setNoItem
 }) => {
   const products: ProductItem[] = [
@@ -183,7 +183,7 @@ const Product: React.FC<ProductProps> = ({
           onDecreaseCount={onDecreaseCount}
           onIncreaseCount={onIncreaseCount}
           handleSetCount={handleSetCount}
-          noItem={noItem}
+          // noItem={noItem}
           // setNoItem={setNoItem}
         />
       </div>
